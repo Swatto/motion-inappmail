@@ -1,4 +1,4 @@
-# motion-inAppMail
+# motion-inAppMail [![Code Climate](https://codeclimate.com/github/Swatto/motion-inappmail.png)](https://codeclimate.com/github/Swatto/motion-inappmail)
 
 A simple wrapper to use MFMailComposeViewController in a simple rubish way :
 
