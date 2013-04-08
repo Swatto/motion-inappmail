@@ -1,4 +1,44 @@
 module InAppMail
+
+  class Result
+    attr_accessor :result, :error
+
+    def initialize(result, error)
+      self.result = result
+      self.error = error
+    end
+
+    def sended?
+      if self.result == MFMailComposeResultSent
+        true
+      else
+        false
+      end
+    end
+
+    def canceled?
+      if self.result == MFMailComposeResultCancelled
+        true
+      else
+        false
+      end
+    end
+
+    def saved?
+      if self.result == MFMailComposeResultSaved
+        true
+      else
+        false
+      end
+    end
+
+    def failed?
+      if((self.result == MFMailComposeResultFailed)||(error))
+        true
+      end
+    end
+  end
+
   module_function
 
   def create(delegate,options,&callback)
@@ -44,6 +84,6 @@ module InAppMail
 
   def mailComposeController(controller, didFinishWithResult: result, error: error)
     @delegate.dismissModalViewControllerAnimated(true)
-    @callback.call result: result, error: error
+    @callback.call Result.new(result,error)
   end
 end
