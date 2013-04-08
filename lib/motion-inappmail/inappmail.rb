@@ -17,8 +17,8 @@ module InAppMail
         @mailController.setCcRecipients(options[:cc])
       end
 
-      if((options[:bcc])&&(options[:bcc].class == Array))
-        @mailController.setBccRecipients(options[:bcc])
+      if((options[:cci])&&(options[:cci].class == Array))
+        @mailController.setBccRecipients(options[:cci])
       end
 
       if((options[:subject])&&(options[:subject].class == String))
