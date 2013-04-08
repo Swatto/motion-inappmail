@@ -33,7 +33,7 @@ module InAppMail
     end
 
     def failed?
-      if((self.result == MFMailComposeResultFailed)||(error))
+      if((self.result == MFMailComposeResultFailed)||(self.error))
         true
       end
     end
