@@ -32,10 +32,14 @@ class TestViewController < UIViewController
                     body: "<h1>Hi from my super iOS app !</h1>"
                 }
             }) do |callback|
-            if callback[:result] == MFMailComposeResultSent
-                p "email sent"
-            else
-                p "Result: #{callback[:result]} & error: #{callback[:error]}"
+            if callback.sended?
+                p "Email sent"
+            elsif callback.canceled?
+                p "Email canceled"
+            elsif callback.saved?
+                p "Email saved in draft"
+            elsif callback.failed?
+                p "Error : #{callback.error}"
             end
         end
     end
