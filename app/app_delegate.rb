@@ -21,14 +21,21 @@ class TestViewController < UIViewController
     end
 
     def createMail
-        InAppMail.create(self,{
-            to: ["foo@bar.com"],
-            subject: "Hi !"
+        InAppMail.create(self,
+            {
+                to: ["contact@example.com","contact2@example.com"],
+                cc: ["foo@bar.com"],
+                cci: ["bar@foo.com"],
+                subject: "Hi everyone !",
+                message: {
+                    html: true,
+                    body: "<h1>Hi from my super iOS app !</h1>"
+                }
             }) do |callback|
             if callback[:result] == MFMailComposeResultSent
                 p "email sent"
             else
-                p callback[:result]
+                p "Result: #{callback[:result]} & error: #{callback[:error]}"
             end
         end
     end
