@@ -16,6 +16,8 @@ module InAppMail
       end
     end
 
+    alias_method :sent?, :sended?
+
     def canceled?
       if self.result == MFMailComposeResultCancelled
         true

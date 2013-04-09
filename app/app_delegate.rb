@@ -32,7 +32,7 @@ class TestViewController < UIViewController
                     body: "<h1>Hi from my super iOS app !</h1>"
                 }
             }) do |callback|
-            if callback.sended?
+            if callback.sent?
                 p "Email sent"
             elsif callback.canceled?
                 p "Email canceled"
