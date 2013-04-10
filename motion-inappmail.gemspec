@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
     s.name          = "motion-inappmail"
-  s.version         = '0.1.1'
+  s.version         = '0.1.2'
   s.summary         = "Simple wrapper to create mail in your app"
   s.description     = "Simple wrapper to create mail in your app"
   s.authors         = ["Gael Gillard"]
