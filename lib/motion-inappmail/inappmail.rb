@@ -18,7 +18,7 @@ module InAppMail
     if delegate
       @delegate = delegate
     else
-      warn "InAppMail need the view or the view controller"
+      warn "[WARNING] InAppMail need a the current view or view controller as first argument."
       return true
     end
 
