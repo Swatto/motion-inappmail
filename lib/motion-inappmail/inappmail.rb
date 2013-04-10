@@ -1,50 +1,21 @@
+# ========================================================================
+# InAppMail module created by Gaël Gillard (http://blog.gaelgillard.com)
+# Use it, hack it, embed it in your project or whatever
+# ========================================================================
+
 module InAppMail
-
-  class Result
-    attr_accessor :result, :error
-
-    def initialize(result, error)
-      self.result = result
-      self.error = error
-    end
-
-    def sended?
-      if self.result == MFMailComposeResultSent
-        true
-      else
-        false
-      end
-    end
-
-    alias_method :sent?, :sended?
-
-    def canceled?
-      if self.result == MFMailComposeResultCancelled
-        true
-      else
-        false
-      end
-    end
-
-    def saved?
-      if self.result == MFMailComposeResultSaved
-        true
-      else
-        false
-      end
-    end
-
-    def failed?
-      if((self.result == MFMailComposeResultFailed)||(self.error))
-        true
-      end
-    end
-  end
 
   module_function
 
-  def create(delegate,options,&callback)
-    @callback = callback
+  # Base method to create your in app mail
+  # ---------------------------------------
+  # Arguments :
+  # 1. The parent view or the view controller. Needed to push it as a modal
+  # 2. The hash to construct the base of the mail (secondary)
+  # 3. The callback block (secondary)
+  
+  def compose(delegate,options=nil,&callback)
+    @callback = callback if callback
     @delegate = delegate
 
     @mailController = MFMailComposeViewController.alloc.init
@@ -84,8 +55,21 @@ module InAppMail
     @delegate.presentModalViewController(@mailController, animated:true)
   end
 
+  # [DEPRECATION] Old name of method to create your in app mail
+  # -------------------------------------------------------------
+  # Arguments : same as compose
+
+  def create(delegate,options=nil,&callback)
+    warn "[DEPRECATION] `create` is deprecated for InAppMail. Use the compose method instead."
+    self.compose(delegate,options,&callback)
+  end
+
+  # Event when the MFMailComposeViewController is closed
+  # -------------------------------------------------------------
+  # the callback is fired if it was present in the constructor
+
   def mailComposeController(controller, didFinishWithResult: result, error: error)
     @delegate.dismissModalViewControllerAnimated(true)
-    @callback.call Result.new(result,error)
+    @callback.call(Result.new(result,error)) if @callback
   end
 end
