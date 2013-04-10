@@ -3,7 +3,7 @@
 A simple wrapper to use MFMailComposeViewController in a simple rubish way :
 
 ```ruby
-InAppMail.create(self,
+InAppMail.compose(self,
     {
         to: ["contact@example.com","contact2@example.com"],
         cc: ["foo@bar.com"],
@@ -28,6 +28,6 @@ end
 
 ## Usage
 
-* The first params is the view or the view controller. It's needed to push it as a modal.
-* The second params is the options of your mail.
-* The third is your callback block.
+* The first params is the view or the view controller. It's needed to push it as a modal (needed).
+* The second params is the options of your mail (secondary).
+* The third is your callback block (secondary).
