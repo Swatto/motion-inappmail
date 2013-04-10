@@ -14,9 +14,15 @@ module InAppMail
   # 2. The hash to construct the base of the mail (secondary)
   # 3. The callback block (secondary)
   
-  def compose(delegate,options=nil,&callback)
+  def compose(delegate=nil,options=nil,&callback)
+    if delegate
+      @delegate = delegate
+    else
+      warn "InAppMail need the view or the view controller"
+      return true
+    end
+
     @callback = callback if callback
-    @delegate = delegate
 
     @mailController = MFMailComposeViewController.alloc.init
     @mailController.mailComposeDelegate = self
@@ -59,7 +65,7 @@ module InAppMail
   # -------------------------------------------------------------
   # Arguments : same as compose
 
-  def create(delegate,options=nil,&callback)
+  def create(delegate=nil,options=nil,&callback)
     warn "[DEPRECATION] `create` is deprecated for InAppMail. Use the compose method instead."
     self.compose(delegate,options,&callback)
   end
