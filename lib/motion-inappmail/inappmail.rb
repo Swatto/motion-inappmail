@@ -58,6 +58,20 @@ module InAppMail
       end
     end
 
+    if((options[:attachments])&&(options[:attachments].class == Array))
+      options[:attachments].each do |attachment|
+        next unless attachment.class == Hash
+        data = attachment[:data]
+        mimeType = attachment[:mimeType]
+        fileName = attachment[:fileName]
+        next unless data && mimeType && fileName
+
+        if((data.class == NSConcreteData)&&(mimeType.class == String)&&(fileName.class == String))
+          @mailController.addAttachmentData(data, mimeType: mimeType, fileName: fileName)
+        end
+      end
+    end
+
     @delegate.presentModalViewController(@mailController, animated:true)
   end
 

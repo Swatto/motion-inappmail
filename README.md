@@ -26,6 +26,35 @@ InAppMail.compose(self,
 end
 ```
 
+## Adding Attachments
+```ruby
+fileData = NSData.dataWithContentsOfFile(someFilePath)
+
+InAppMail.compose(self,
+    {
+        to: ["contact@example.com","contact2@example.com"],
+        cc: ["foo@bar.com"],
+        cci: ["bar@foo.com"],
+        subject: "Hi everyone !",
+        message: {
+            html: true,
+            body: "<h1>Hi from my super iOS app !</h1>"
+        },
+        attachments: [{data:fileData, mimeType:'text/plain', fileName: 'someFile.txt'}]
+    }) do |callback|
+    if callback.sent?
+        p "Email sent"
+    elsif callback.canceled?
+        p "Email canceled"
+    elsif callback.saved?
+        p "Email saved in draft"
+    elsif callback.failed?
+        p "Error : #{callback.error}"
+    end
+end
+```
+
+
 ## Usage
 
 * The first params is the view or the view controller. It's needed to push it as a modal (needed).
