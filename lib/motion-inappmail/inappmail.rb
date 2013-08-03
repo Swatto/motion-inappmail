@@ -58,6 +58,16 @@ module InAppMail
       end
     end
 
+    if((options[:attachments])&&(options[:attachments].class == Hash))
+      data = options[:attachments][:data]
+      mimeType = options[:attachments][:mimeType]
+      p "CLASS:"
+      p data.class
+      if((data && data.class == NSData)&&(mimeType && mimeType.class == String))
+        @mailController.addAttachmentData(data, mimeType: mimeType)
+      end
+    end
+
     @delegate.presentModalViewController(@mailController, animated:true)
   end
 
