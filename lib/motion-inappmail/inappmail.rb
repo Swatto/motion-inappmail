@@ -58,13 +58,17 @@ module InAppMail
       end
     end
 
-    if((options[:attachments])&&(options[:attachments].class == Hash))
-      data = options[:attachments][:data]
-      mimeType = options[:attachments][:mimeType]
-      p "CLASS:"
-      p data.class
-      if((data && data.class == NSData)&&(mimeType && mimeType.class == String))
-        @mailController.addAttachmentData(data, mimeType: mimeType)
+    if((options[:attachments])&&(options[:attachments].class == Array))
+      options[:attachments].each do |attachment|
+        next unless attachment.class == Hash
+        data = attachment[:data]
+        mimeType = attachment[:mimeType]
+        fileName = attachment[:fileName]
+        next unless data && mimeType && fileName
+
+        if((data.class == NSConcreteData)&&(mimeType.class == String)&&(fileName.class == String))
+          @mailController.addAttachmentData(data, mimeType: mimeType, fileName: fileName)
+        end
       end
     end
 
