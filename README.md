@@ -1,5 +1,10 @@
 # motion-inAppMail [![Gem Version](https://badge.fury.io/rb/motion-inappmail.png)](http://badge.fury.io/rb/motion-inappmail) [![Code Climate](https://codeclimate.com/github/Swatto/motion-inappmail.png)](https://codeclimate.com/github/Swatto/motion-inappmail)
 
+## This repo is now part of [BubbleWrap](https://github.com/rubymotion/BubbleWrap)
+#### Please don't make issues and pul requests here (this repo still exist for the past of the project)
+
+---
+
 A simple wrapper to use MFMailComposeViewController in a simple rubish way :
 
 ```ruby
